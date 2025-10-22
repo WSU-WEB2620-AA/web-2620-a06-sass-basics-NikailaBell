@@ -1,3 +1,39 @@
+.nav {
+  position: absolute;
+  right: 0;
+  top: 2.2em;
+}
+.nav ul {
+  list-style-type: none;
+}
+.nav ul li {
+  float: left;
+}
+.nav ul li:last-child {
+  padding-right: 0;
+}
+.nav ul li a,
+.nav ul li span {
+  display: block;
+  margin-left: 0.7em;
+  padding: 0.8em 1.2em;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  color: #333;
+  transition: color 0.35s ease-in-out;
+}
+.nav ul li.active a {
+  background: #0d6efd;
+  border-radius: 6px;
+  color: #fff;
+}
+.nav ul li a:hover {
+  background: rgb(38.2909836066, 125.1536885246, 253.2090163934);
+  color: #fff;
+}
+
 body {
   background: #202020 url("/images/footer-bg.jpg") repeat;
   min-width: 1200px;
