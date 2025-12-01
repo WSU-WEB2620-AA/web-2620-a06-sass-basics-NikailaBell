@@ -1,25 +1,41 @@
 
 @use 'sass:color';
-@use 'nav';
 
 
-// =========
-// Variables
-// ==========
 
-// Colors
+
+/* =========
+   Variables
+ ==========*/
+
+//CORRECTION: now have over 12 variables.
+
+// Colors 
 $primary-color: #0d6efd;
+$secondary-color: #f0bc69; 
 $background-dark: #202020;
+$background-light: #fff; 
 $text-light: rgba(255, 255, 255, 0.4);
 $text-dark: #333;
 $white: #fff;
 $border-color: rgba(0, 0, 0, 0.1);
+$border-dark: #303030;
+$transition: 0.35s;
+$border-radius: 6px;
 
-// Fonts
+
+
+/* Fonts / Typography */
 $font-main: 'Roboto Condensed', sans-serif;
+$font-heading-weight: 300;
+$font-body-size: 11pt;
+$line-height: 1.75em;
+$letter-spacing: 1px;
 
-// Sizes
+/* Layout / Containers */
 $container-width: 1200px;
+$container-small: 900px;
+$container-big: 1500px;
 $gutter: 50px;
 $border-radius: 6px;
 $transition: 0.35s;
@@ -27,27 +43,38 @@ $transition: 0.35s;
 // Image paths
 $img-path: '/images';
 
-//NESTING the comment changes to...
 
-// body {
-//   background: #202020 url('/images/footer-bg.jpg') repeat;
-//   min-width: 1200px;
-//   margin: 0;
-//   padding: 0;
-// }
+// Loop for margin utilities
+@for $i from 1 through 6 {
+  .m-#{$i} {
+    margin: $i * 0.25rem;
+  }
+}
 
-// body,
-// input,
-// textarea,
-// select {
-//   font-family: 'Roboto Condensed', sans-serif;
-//   font-weight: 300;
-//   font-size: 11pt;
-//   line-height: 1.75em;
-//}
+//import nav
+@import 'nav';
+
+/*NESTING the comment changes to...
+
+body {
+  background: #202020 url('/images/footer-bg.jpg') repeat;
+  min-width: 1200px;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+input,
+textarea,
+select {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 300;
+  font-size: 11pt;
+  line-height: 1.75em;
+}
 
 
-//this...
+this...*/
 
 body {
   background: $background-dark url('#{$img-path}/footer-bg.jpg') repeat;
@@ -57,34 +84,36 @@ body {
   font-family: $font-main;
   font-weight: 300;
   font-size: 11pt;
-  line-height: 1.75em;}
+  line-height: 1.75em;
+}
 
 
 
-// these comments nest to....
+/* these comments nest to....
 
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6 {
-//   letter-spacing: 1px;
-//   text-transform: uppercase;
-//   font-weight: 300;
-//}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
 
-// h1 a,
-// h2 a,
-// h3 a,
-// h4 a,
-// h5 a,
-// h6 a {
-//   color: inherit;
-//   text-decoration: none;
-//}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: inherit;
+  text-decoration: none;
+}
 
-//this
+this*/
+
 h1, h2, h3, h4, h5, h6 {
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -101,10 +130,10 @@ h1, h2, h3, h4, h5, h6 {
 strong,
 b {
   font-weight: bold;
-  color: $text-dark; //use the dark text variable instead of listing color over again
+  color: $text-dark; /*use the dark text variable instead of listing color over again*/
 }
 
-//not sure here if I need to change????????
+
 em,
 i {
   font-style: italic;
@@ -139,37 +168,49 @@ table {
   margin-bottom: 1em;
 }
 
+// fixed this so that they are all nested in header now
 header {
   margin-bottom: 2em;
   line-height: 1.7em;
+
+  h2 {
+    font-size: 2.5em;
+  }
+
+  .byline {
+    display: block;
+    margin: 0.5em 0 0 0;
+    padding: 0 0 0.5em 0;
+    text-transform: uppercase;
+    font-size: 1.4em;
+  }
 }
 
-header h2 {
-  font-size: 2.5em;
+// also made sure section and article were nested correctly too
+section {
+  margin-bottom: 3em;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-header .byline {
-  display: block;
-  margin: 0.5em 0 0 0;
-  padding: 0 0 0.5em 0;
-  text-transform: uppercase;
-  font-size: 1.4em;
-}
-
-section,
 article {
   margin-bottom: 3em;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-section > :last-child,
-article > :last-child {
-  margin-bottom: 0;
-}
-
-section:last-child,
-article:last-child {
-  margin-bottom: 0;
-}
 
 blockquote {
   margin: 0;
@@ -183,51 +224,51 @@ footer {
 }
 
 
-//nesting container goes from the comments to...
-
-// .container {
-//   width: 1200px;
-//   margin-left: auto;
-//   margin-right: auto;
-//}
-
-// .container.small {
-//   width: 900px;
-//}
-
-// .container.big {
-//   width: 100%;
-//   max-width: 1500px;
-//   min-width: 1200px;
-//}
-
-// .row section,
-// .row article {
-//   margin-bottom: 0;
-// }
-
-// .row [class*='column-'] {
-//   padding: 50px 0 0 50px;
-//   float: left;
-//   box-sizing: border-box;
-// }
-
-// .row {
-//   margin-left: -50px;
-// }
-
-// .row:after {
-//   content: '';
-//   display: block;
-//   clear: both;
-//   height: 0;
-//} 
-
-// to this nested version of row:
-
-//to this with row also nested in container
+/*nesting container goes from the comments to...
 
 .container {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container.small {
+  width: 900px;
+}
+
+.container.big {
+  width: 100%;
+  max-width: 1500px;
+  min-width: 1200px;
+}
+
+.row section,
+.row article {
+  margin-bottom: 0;
+}
+
+.row [class*='column-'] {
+  padding: 50px 0 0 50px;
+  float: left;
+  box-sizing: border-box;
+}
+
+.row {
+  margin-left: -50px;
+}
+
+.row:after {
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+} 
+
+to this with row also nested in container
+*/
+
+.container {
+  position: relative;
   width: $container-width;
   margin: 0 auto;
 
@@ -261,203 +302,125 @@ footer {
   }
 }
 
-// turn this commented to a loop to make easier...
+/*CORECTION: made sure to use multi-line comments
 
-// .column-1,
-// .column-2,
-// .column-3,
-// .column-4,
-// .column-5,
-// .column-6,
-// .column-7.column-8,
-// .column-9,
-// .column-10,
-// .column-11,
-// .column-12 {
-//   width: 100%;
-//}
+ turn this commented to a loop to make easier...
+
+.column-1,
+.column-2,
+.column-3,
+.column-4,
+.column-5,
+.column-6,
+.column-7.column-8,
+.column-9,
+.column-10,
+.column-11,
+.column-12 {
+  width: 100%;
+}
+*/
 
 $columns: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
 
 @each $col in $columns {
   .column-#{$col} {
-    width: (100% / 12) * $col;
+    width: calc(100% / 12) * $col;
   }
 }
 
 
-// @media all and (min-width: 576px){
-//   .column-1 {
-//     width: 8.33333%;
-//  }
+/*
+@media all and (min-width: 576px){
+  .column-1 {
+    width: 8.33333%;
+ }
 
-//   .column-2 {
-//     width: 16.66667%;
-//   }
+  .column-2 {
+    width: 16.66667%;
+  }
 
-//   .column-3 {
-//     width: 25%;
-//   }
+  .column-3 {
+    width: 25%;
+  }
 
-//   .column-4 {
-//     width: 33.33333%;
-//   }
+  .column-4 {
+    width: 33.33333%;
+  }
 
-//   .column-5 {
-//     width: 41.66667%;
-//   }
+  .column-5 {
+    width: 41.66667%;
+  }
 
-//   .column-6 {
-//     width: 50%;
-//   }
+  .column-6 {
+    width: 50%;
+  }
 
-//   .column-7 {
-//     width: 58.33333%;
-//   }
+  .column-7 {
+    width: 58.33333%;
+  }
 
-//   .column-8 {
-//     width: 66.66667%;
-//   }
+  .column-8 {
+    width: 66.66667%;
+  }
 
-//   .column-9 {
-//     width: 75%;
-//   }
+  .column-9 {
+    width: 75%;
+  }
 
-//   .column-10 {
-//     width: 83.33333%;
-//   }
+  .column-10 {
+    width: 83.33333%;
+  }
 
-//   .column-11 {
-//     width: 91.66667%;
-//   }
+  .column-11 {
+    width: 91.66667%;
+  }
 
-//   .column-12 {
-//     width: 100%;
-//   }
-// }
+  .column-12 {
+    width: 100%;
+  }
+}
+*/
 
-.image {
+image {
   display: inline-block;
 
+  &.img {
+    display: block;
+    width: 100%;
+  }
 
-&.img {
-  display: block;
-  width: 100%;
+  &.featured {
+    display: block;
+    width: 100%;
+    margin: 0 0 2em 0;
+  }
+
+  &.full {
+    display: block;
+    width: 100%;
+    margin-bottom: 2em;
+  }
+
+  &.left {
+    float: left;
+    margin: 0 2em 2em 0;
+  }
+
+  &.centered {
+    display: block;
+    margin: 0 0 2em 0;
+
+    img {
+      display: block;
+      margin: 0 auto;
+      width: auto;
+    }
+  }
 }
 
-&.featured {
-  display: block;
-  width: 100%;
-  margin: 0 0 2em 0;
-}
 
-&.full {
-  display: block;
-  width: 100%;
-  margin-bottom: 2em;
-}
-
-&.left {
-  float: left;
-  margin: 0 2em 2em 0;
-}
-
-&.centered {
-  display: block;
-  margin: 0 0 2em 0;
-
-
-& img {
-  margin: 0 auto;
-  width: auto;
-}
-}
-}
-
-
-// ul.default {
-//   margin: 0;
-//   padding: 0;
-//   list-style: none;
-// }
-
-// ul.default li {
-//   display: block;
-//   padding: 2em 0em 1.25em 0em;
-//   border-top: 1px solid #303030;
-// }
-
-// ul.default li:first-child {
-//   padding-top: 0em;
-//   border-top: none;
-// }
-
-// ul.default a {
-//   text-decoration: none;
-//   color: rgba(255, 255, 255, .5);
-// }
-
-// ul.default a:hover {
-//   text-decoration: underline;
-// }
-
-// ul.style1 {
-//   margin: 0;
-//   padding: 0;
-//   list-style: none;
-// }
-
-// ul.style1 li {
-//   padding: 0.60em 0em;
-//   border-top: 1px solid;
-//   border-color: rgba(0, 0, 0, .1);
-// }
-
-// ul.style1 li:first-child {
-//   padding-top: 0;
-//   border-top: 0;
-// }
-
-// ul.style2 {
-//   margin: 0;
-//   padding: 0;
-//   list-style: none;
-// }
-
-// ul.style2 li {
-//   padding: 1.90em 0em 1.60em 0em;
-//   border-top: 1px solid;
-//   border-color: rgba(0, 0, 0, .1);
-// }
-
-// ul.style2 li:first-child {
-//   padding-top: 0;
-//   border-top: 0;
-// }
-
-// ul.style2 img {
-//   float: left;
-//   padding-right: 1em;
-// }
-
-// ul.style5 {
-//   overflow: hidden;
-//   margin: 0em 0em 1em 0em;
-//   padding: 0em;
-//   list-style: none;
-// }
-
-// ul.style5 li {
-//   float: left;
-//   padding: 0.25em 0.25em;
-//   line-height: 0;
-// }
-
-
-//all the above ul elements are neatly neately nested as so:
-
-
-ul.default {
+/* ul.default {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -534,9 +497,91 @@ ul.style5 li {
   padding: 0.25em 0.25em;
   line-height: 0;
 }
+*/
 
 
-//following have been nested
+
+//all the above ul elements are neatly neately nested as so: 
+
+ul.default {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: block;
+    padding: 2em 0 1.25em 0;
+    border-top: 1px solid #303030;
+
+    &:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+ul.style1 {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 0.60em 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+  }
+}
+
+ul.style2 {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 1.90em 0 1.60em 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+  }
+
+  img {
+    float: left;
+    padding-right: 1em;
+  }
+}
+
+ul.style5 {
+  overflow: hidden;
+  margin: 0 0 1em 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    float: left;
+    padding: 0.25em;
+    line-height: 0;
+  }
+}
+
+
+
+// Buttons
 
 .button {
   position: relative;
@@ -560,21 +605,23 @@ ul.style5 li {
 }
 
 
-
-
+/*I also fixed the nav so it appears now,
+ I had a typo that stopped it*/
+ 
+//Header
 .header {
   position: relative;
   background: #FFF;
 
 
-&.container {
+.container {
   position: relative;
   padding: 4em 0em;
 }
 }
 
 
-
+//Logo
 .logo {
   position: absolute;
   left: 0em;
@@ -589,7 +636,7 @@ ul.style5 li {
 }
 
 
-
+//Banner
 .banner {
   position: relative;
   padding: 12em 0em;
@@ -598,6 +645,7 @@ ul.style5 li {
   color: #fff;
 }
 
+//Page
 .page {
   position: relative;
   background: #fff;
@@ -613,7 +661,7 @@ ul.style5 li {
 }
 
 
-
+//Footer
 .footer {
   position: relative;
   color: rgba(255, 255, 255, 0.4);
@@ -643,7 +691,7 @@ ul.style5 li {
  a {
   text-decoration: none;
   color: rgba(255, 255, 255, .4) !important;
-}
+  }
 }
 
 
